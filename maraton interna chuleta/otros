@@ -1,0 +1,67 @@
+//////palindromes/////////////////
+ bool checkNum(lli a)
+{
+   int reverse = 0, temp; 
+   temp = a;
+ 
+   while( temp != 0 )
+   {
+      reverse = reverse * 10;
+      reverse = reverse + temp%10;
+      temp = temp/10;
+   }
+ 
+   if ( a == reverse )
+      return true;
+   else
+     return false;
+}
+
+//gcd/////////////////////////////
+#include <iostream>
+
+int main() {
+
+int a;
+int b;
+int temp;
+
+cout << "Enter the 1st integer : ";
+cin >> a;
+cout << "Enter the 2nd integer : ";
+cin >> b;
+
+while( b!= 0) {
+
+temp = a % b;
+a = b;
+b = temp;
+}
+
+cout << a << endl;
+
+return 0;
+}
+//LCM//////////////////////////////
+
+//primos/////////////////////////
+
+
+//factores primos///////////////
+void Factorize(unsigned u)
+{
+    for(unsigned i(2);i<=u;i++) //(1)
+    {
+        if(u%i == 0)
+        {   cout << i;
+            if (u!=i)
+            {
+                cout << "*";
+                Factorize(u/i);
+                return;         //(2)
+            }
+        }
+    }
+}
+
+
