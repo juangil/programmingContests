@@ -26,7 +26,7 @@ double polyn_at(pol p, pol q,double val)//polynomial calculation with honer's me
    return acum/acum2;
 }  
   
-double num_integr(pol p1, pol p2, pol q1, pol q2, double d, double w)
+double num_integr(pol p1, pol p2, pol q1, pol q2, double d, double w)//Area under a curve
 {
    double delta = w/(double) divi;  
    double acum = 0.0 , acum2 = 0.0; 
@@ -52,7 +52,7 @@ double num_integr(pol p1, pol p2, pol q1, pol q2, double d, double w)
    
 }
 
-double search(pol p1, pol p2, pol q1, pol q2, double d, double target, double w)
+double search(pol p1, pol p2, pol q1, pol q2, double d, double target, double w)//binary search
 {
    double lo = 0.0;
    double eps = 0.0000001;
