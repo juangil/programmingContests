@@ -124,10 +124,10 @@ int main(){
           
           VD x;
           LPSolver mySolver = LPSolver( b, c);
-          mySolver.Solve(x);
-          double acum = 0.0;
-          for(int i = 0; i < n; ++i) acum += x[i];
-          printf("%.2f\n", acum);
+          double d = mySolver.Solve(x);
+          //double acum = 0.0;
+          //for(int i = 0; i < n; ++i) acum += x[i];
+          printf("%.2f\n", d);
      }
      return 0;
 }
