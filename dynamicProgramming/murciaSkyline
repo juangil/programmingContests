@@ -1,0 +1,53 @@
+# include <bits/stdc++.h>
+# define MAXLEN 5000
+using namespace std;
+
+int dp [MAXLEN];
+int myWidth[MAXLEN];
+int myHeight[MAXLEN];
+
+int ldis(int i, int flag = 1){
+    if(i == 0) return myWidth[0];
+    if(dp[i] != -1) return dp[i];
+    int ans = myWidth[i];
+    for(int j = 0; j < i; ++j){
+        if((myHeight[j] < myHeight[i]) && flag)
+            ans = max(ans, myWidth[j] + ldis(j));
+        else if((myHeight[j] > myHeight[i]) && !flag)
+            ans = max(ans, myWidth[j] + ldis(j, 0));
+    }
+    return ans;
+}
+
+
+int main(){
+    int n, tc = 0;
+    while(cin >> n){
+        for(int i = 0; i < n; ++i){
+            cin >> myHeight[i];
+            dp[i] = -1;
+        }
+        for(int i = 0; i < n; ++i)
+            cin >> myWidth[i];
+        
+        int mmax = -1;
+        for(int i = 0; i < n; ++i){
+            dp[i] = ldis(i);
+            if(dp[i] > mmax) mmax = dp[i];
+        }
+        int a = mmax, b;
+        for(int i = 0; i < n; ++i)
+            dp[i] = -1;
+            
+        mmax = -1;
+        for(int i = 0; i < n; ++i){
+            dp[i] = ldis(i, 0);
+            if(dp[i] > mmax) mmax = dp[i];
+        }
+        b = mmax;
+        if(a > b) printf("Case %d: Increasing (%d). Decreasing (%d).", ++tc, a, b);
+        else if(a < b) if(a > b) printf("Case %d: Decreasing (%d). Decreasing (%d).", ++tc, b, a);
+    }
+
+    return 0;
+}
