@@ -3,7 +3,7 @@
 using namespace std;
 typedef long long int lli;
 
-
+//lli x = 0,y = 0,z = 0;
 /*
     merge-sort: the input of the algorithm is an array of integers in some order
                 a is the original array and b is the array where the algorithm is going
@@ -15,8 +15,8 @@ typedef long long int lli;
 */
 
 
-lli mergeCount(int*, int*, int, int, int);
-lli mergeSortInversionCount(int *a, int *b, int low, int high){
+int mergeCount(int*, int*, int, int, int);
+int mergeSortInversionCount(int *a, int *b, int low, int high){
     int pivot; // the median of the array a.
     lli x = 0,y = 0,z = 0;
     if(low < high){ // if low is less than high its because we have a single element array 
@@ -33,12 +33,12 @@ lli mergeSortInversionCount(int *a, int *b, int low, int high){
     return x+y+z;
 }
 
-lli mergeCount(int *a, int *b, int low, int pivot, int high){
+int mergeCount(int *a, int *b, int low, int pivot, int high){
     int h,i,j,k;
     h = low; //Pointer to the first half of the array
     i = low; //pointer for all the array
     j = pivot + 1;//Pointer to the second half of the array
-    lli countInversions = 0;
+    int countInversions = 0;
     while((h <= pivot)){
         if(j > high){
             j = pivot+1;
@@ -48,11 +48,12 @@ lli mergeCount(int *a, int *b, int low, int pivot, int high){
         if(a[h] <= a[j])
             j++;
         else{
+            //cout<<a[h]<<" by "<<a[j]<<" - ";
             j++;
             countInversions++;
         }
     }
-   
+    cout<<endl;
     return countInversions;
 }
 
