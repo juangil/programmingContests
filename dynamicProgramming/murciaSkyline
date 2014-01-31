@@ -47,7 +47,7 @@ int main(){
             if(dp[i] > mmax) mmax = dp[i];
         }
         b = mmax;
-        cout<<a<<" "<<b<<endl;
+        //cout<<a<<" "<<b<<endl;
         if(a >= b) printf("Case %d. Increasing (%d). Decreasing (%d).\n", ++tc, a, b);
         else if(a < b) printf("Case %d. Decreasing (%d). Increasing (%d).\n", ++tc, b, a);
     }
