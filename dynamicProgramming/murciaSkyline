@@ -12,17 +12,19 @@ int ldis(int i, int flag = 1){
     int ans = myWidth[i];
     for(int j = 0; j < i; ++j){
         if((myHeight[j] < myHeight[i]) && flag)
-            ans = max(ans, myWidth[j] + ldis(j));
+            ans = max(ans, myWidth[i] + ldis(j));
         else if((myHeight[j] > myHeight[i]) && !flag)
-            ans = max(ans, myWidth[j] + ldis(j, 0));
+            ans = max(ans, myWidth[i] + ldis(j, 0));
     }
     return ans;
 }
 
 
 int main(){
-    int n, tc = 0;
-    while(cin >> n){
+    int n, tc = 0, t;
+    cin >> t;
+    while(t--){
+        cin >> n;
         for(int i = 0; i < n; ++i){
             cin >> myHeight[i];
             dp[i] = -1;
@@ -45,8 +47,9 @@ int main(){
             if(dp[i] > mmax) mmax = dp[i];
         }
         b = mmax;
-        if(a > b) printf("Case %d: Increasing (%d). Decreasing (%d).", ++tc, a, b);
-        else if(a < b) if(a > b) printf("Case %d: Decreasing (%d). Decreasing (%d).", ++tc, b, a);
+        cout<<a<<" "<<b<<endl;
+        if(a >= b) printf("Case %d. Increasing (%d). Decreasing (%d).\n", ++tc, a, b);
+        else if(a < b) printf("Case %d. Decreasing (%d). Increasing (%d).\n", ++tc, b, a);
     }
 
     return 0;
