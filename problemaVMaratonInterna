@@ -15,17 +15,19 @@ se han reunido en una de estas "Asambleas" para decidir que hacer en cuanto a la
 aprobada por el CSU que aún esta llena de interrogantes que ahora no discutiremos. 
 
 El rector de la UTP se entero de la situación y decidió disfrazarse de estudiante revolucionario para colarse
-e la asamblea, gracias a una solución nueva que invento la facultad de química. El rector ya disfrazado
+en la asamblea, gracias a una solución nueva que invento la facultad de química. El rector ya disfrazado
 ,se llevo consigo un aparato especial que le permitía medir el nivel de aceptación de los estudiantes ante una iniciativa del CSU.
 El aparato funciona sumando el nivel de aceptación de todos los estudiantes(medido de 0 a 100, de menos aceptación, a más aceptación)
-y dependiendo del resultado, el aparato lo situa en tres intervalos, Posible paro pero no les pongas cuidado, Asamblea permanente
-ten cuidado y no te preocupes haz las reformas que quieras. 
+y el resultado activa un mensaje que aparece en el aparato dependiendo de la ubicación de dicho resultado en tres intervalos
+separados por dos valores s y t. Si el resultado de la suma esta entre 0 y s el mensaje será:"Posible paro pero no les pongas cuidado",
+si esta entre s y t el mensaje será:"Asamblea permanente ten cuidado" y si está entre t y 100000 el mensaje será:
+"no te preocupes haz las reformas que quieras". 
 
 Tu como estudiante pilo de la escuela de ciencias de la computación te das cuenta de las intenciones del rector y sabes lo que esta
 tramando, tus habilidades de _Hacking te permitieron ver la información que maneja el rector en su dispositivo. Como buen estudiante 
 sabes que no quieres perder otro semestre pero tampoco quieres que la gente se olvide del problema, entonces decides intervenir en
 la asamblea para mover la opinión de la gente de tal forma de que la suma del nivel de aceptación de los estudiantes se igual al intervalo
-de la mitad, el más racional para ti.
+de la mitad, haciendo que el rector se lo piense dos veces antes de implementar la medida.
 
 Una asamblea de estudiantes se puede modelar de la siguiente manera:
 
@@ -47,7 +49,7 @@ Una asamblea de estudiantes se puede modelar de la siguiente manera:
   de ser posible debes calcular la mínima cantidad de intervenciones que deberías realizar. Ten cuidado a veces tendrás que
   hablar bien de la iniciativa del CSU para evitar que la aceptación general se ubique en el primer intevalo y a veces tendrás que hablar
   mal de la iniciativa del CSU para evitar que la aceptación general se suba al tercer intervalo, cumpliendo así
-  tu cometido de ser posible.
+  tu objetivo.
 
 entrada
 
