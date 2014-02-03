@@ -15,11 +15,11 @@ se han reunido en una de estas "Asambleas" para decidir que hacer en cuanto a la
 aprobada por el CSU que aún esta llena de interrogantes que ahora no discutiremos. 
 
 El rector de la UTP se entero de la situación y decidió disfrazarse de estudiante revolucionario para colarse
-e la asamblea, gracias a los poderes mágicos que la nueva escuela de alquimia había desarrollado. El rector ya disfrazado
+e la asamblea, gracias a una solución nueva que invento la facultad de química. El rector ya disfrazado
 ,se llevo consigo un aparato especial que le permitía medir el nivel de aceptación de los estudiantes ante una iniciativa del CSU.
 El aparato funciona sumando el nivel de aceptación de todos los estudiantes(medido de 0 a 100, de menos aceptación, a más aceptación)
- y dependiendo del resultado, el aparato lo situa en tres intervalos, Posible paro pero no les pongas cuidado, Asamblea permanente
- ten cuidado y no te preocupes haz las reformas que quieras. 
+y dependiendo del resultado, el aparato lo situa en tres intervalos, Posible paro pero no les pongas cuidado, Asamblea permanente
+ten cuidado y no te preocupes haz las reformas que quieras. 
 
 Tu como estudiante pilo de la escuela de ciencias de la computación te das cuenta de las intenciones del rector y sabes lo que esta
 tramando, tus habilidades de _Hacking te permitieron ver la información que maneja el rector en su dispositivo. Como buen estudiante 
@@ -37,7 +37,17 @@ Una asamblea de estudiantes se puede modelar de la siguiente manera:
   la iniciativa del CSU o repudia la iniciativa del CSU, respectivamente.
 - La parte que nos interesa de la asamblea se desarrolla como sigue. Cada estudiante lider j habla por turnos algunos pueden
   repetir pero esto no nos interesa, nos interesa el nivel de influencia en cada turno. Cuando un estudiante lider termina su
-  intervención  un estudiante regular se retira, pero estos últimos se van retirando de acuerdo a su nivel b, primero se retira
-  el estudiante regular con el nivel más pequeño, luego el estudiante con el seguno nivel más pequeño y así sucesivamente
-  hasta que el recinto quede vacío.
+  intervención  un estudiante regular se retira, pero estos últimos se van retirando en orden ascendente según el el valor
+  b para cada estudiante y si es igual para un estudiante i y k se va primero quien tenga el nivel de aceptación a más pequeño.
+  Luego de que un estudiante es influenciado y se va de La asamblea su nuevo nivel de aceptación será 
+  aceptacionNueva = a + z*(5*w), si a < z*5w el valor se deja en cero para no tener valores de aceptación negativo.
+  La asamblea termina cuando no hayan más estudiantes regulares.
+- Sabiendo tu esto y sabiendo que puedes repetir tus intervenciones cuantas veces quieras, dado tu nivel de influencia
+  P ,necesitas saber primero si es   posible mover la opinión de la gente para que el nivel de aceptación total se situe en el intervalo de la mitad,
+  de ser posible debes calcular la mínima cantidad de intervenciones que deberías realizar. Ten cuidado a veces tendrás que
+  hablar bien de la iniciativa del CSU para evitar que la aceptación general se ubique en el primer intevalo y a veces tendrás que hablar
+  mal de la iniciativa del CSU para evitar que la aceptación general se suba al tercer intervalo, cumpliendo así
+  tu cometido de ser posible.
+  
+  
   
