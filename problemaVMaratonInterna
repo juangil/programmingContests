@@ -1,0 +1,43 @@
+Asamblea estudiantil en perelogonia:
+
+Perelogonia es una ciudad que se ha caracterizado siempre por el amor a sus instituciones.
+La Universidad Tecnócrata de Perelogonia es uno de los símbolos de la ciudad, con años de reconocimiento a nivel
+nacional e internacional. Este año la UTP ha decidido remodelar las entradas a la universidad y para añadirle un toque
+moderno el Consejo Superior(máximo organo decisorio administrativo de la universidad) ha decidido 
+que cada entrada debe contar con unos dispositivos para controlar el acceso a la UTP, evitando
+así que extraños y ladrones puedan acceder a al universidad a hacer daños.
+
+En la UTP, universidad publica, abundan los grupos de izquierda política que ante cualquier acción
+que emprenda el CSU reaccionan de forma negativa y preparan una reunión especial en donde los estudiantes
+de toda la universidad pueden reunirse para tomar decisiones sobre que acciones a tomar con respecto a las decisiones
+del CSU, este espacio se conoce como Asamblea estudiantil . Este año no fue la excepción y  los estudiantes ahora 
+se han reunido en una de estas "Asambleas" para decidir que hacer en cuanto a la decisión del control de acceso
+aprobada por el CSU que aún esta llena de interrogantes que ahora no discutiremos. 
+
+El rector de la UTP se entero de la situación y decidió disfrazarse de estudiante revolucionario para colarse
+e la asamblea, gracias a los poderes mágicos que la nueva escuela de alquimia había desarrollado. El rector ya disfrazado
+,se llevo consigo un aparato especial que le permitía medir el nivel de aceptación de los estudiantes ante una iniciativa del CSU.
+El aparato funciona sumando el nivel de aceptación de todos los estudiantes(medido de 0 a 100, de menos aceptación, a más aceptación)
+ y dependiendo del resultado, el aparato lo situa en tres intervalos, Posible paro pero no les pongas cuidado, Asamblea permanente
+ ten cuidado y no te preocupes haz las reformas que quieras. 
+
+Tu como estudiante pilo de la escuela de ciencias de la computación te das cuenta de las intenciones del rector y sabes lo que esta
+tramando, tus habilidades de _Hacking te permitieron ver la información que maneja el rector en su dispositivo. Como buen estudiante 
+sabes que no quieres perder otro semestre pero tampoco quieres que la gente se olvide del problema, entonces decides intervenir en
+la asamblea para mover la opinión de la gente de tal forma de que la suma del nivel de aceptación de los estudiantes se igual al intervalo
+de la mitad, el más racional para ti.
+
+Una asamblea de estudiantes se puede modelar de la siguiente manera:
+
+- Existen un numero N de estudiantes regulares, donde para el i-ésimo estudiante regular existe un nivel a de aceptación de la iniciativa del CSU de 0 a 100
+  y un nivel b de influenciabilidad que varía de 1 a 5, de menos influenciable a más influenciable.
+- Existe un número M de estudiantes líderes que son los que hablan en las asambleas y mueven la opinión hacia un extremo o hacia el otro,
+  para cada estudiante líder j existen 2 valores w y z, con w el estudiante lider j  puede cambiar la opinión de un esudiante regular i con 
+  un nivel de ser influenciable b <= w, la segunda   medida z es un valor binario 1 ó -1 que indica si el estudiante lider acepta 
+  la iniciativa del CSU o repudia la iniciativa del CSU, respectivamente.
+- La parte que nos interesa de la asamblea se desarrolla como sigue. Cada estudiante lider j habla por turnos algunos pueden
+  repetir pero esto no nos interesa, nos interesa el nivel de influencia en cada turno. Cuando un estudiante lider termina su
+  intervención  un estudiante regular se retira, pero estos últimos se van retirando de acuerdo a su nivel b, primero se retira
+  el estudiante regular con el nivel más pequeño, luego el estudiante con el seguno nivel más pequeño y así sucesivamente
+  hasta que el recinto quede vacío.
+  
