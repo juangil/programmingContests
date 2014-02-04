@@ -10,7 +10,7 @@ int dy [8] = {-1,  0,  1, 1, -1, -1, 0, 1};
 //int mytab[N][M];
 
 bool valid (char parent, char children){
-     //cout<<parent<<" "<<children<<endl;
+     cout<<parent<<" "<<children<<endl;
      if(children == 'A' && parent == 'M') return true;
      if(children == 'M' && parent == 'I') return true;
      if(children == 'I' && parent == 'D') return true;
