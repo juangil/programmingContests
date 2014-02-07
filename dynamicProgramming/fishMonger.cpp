@@ -12,17 +12,21 @@ int travelTime [MAXNODES][MAXNODES];
 int toll [MAXNODES][MAXNODES];
 
 pair<int,int> cost(int currentNode, int timeLeft){
-    if(dp[currentNode][timeLeft].first != -1) return dp[currentNode][timeLeft];
     if(timeLeft < 0) return dp[currentNode][timeLeft] = make_pair(MAXINT, MAXINT);
+    if(dp[currentNode][timeLeft].first != -1) return dp[currentNode][timeLeft];
     if(currentNode == N -1) return make_pair(0,0);
     
-    int ans = MAXINT;
+    pair<int,int> ans = make_pair(MAXINT, MAXINT);
     for(int i = 0; i < N; ++i){
         if(currentNode == i) continue;
-        ans = min(ans, toll[currentNode][i] + cost(i, timeLeft - travelTime[currentNode][i]).first);
+        pair<int,int> tmp = cost(i, timeLeft - travelTime[currentNode][i]);
+        if(tmp.first + toll[currentNode][timeLeft] < ans.first){
+            ans.first = tmp.first + toll[currentNode][timeLeft];
+            ans.second = tmp.second + travelTime[currentNode][timeLeft];
+        }
     }
     
-    return dp[currentNode][timeLeft] = make_pair(ans,timeLeft);
+    return dp[currentNode][timeLeft] = ans;
 }
 
 
@@ -44,9 +48,8 @@ int main(){
                 dp[i][j].second = -1;
             }
         }
-    
-       pair<int,int> ans = cost(0,t);
-       cout<<ans.first<<" "<<T - ans.second<<endl;
+        pair<int,int> ans = cost(0,t);
+        cout<<ans.first<<" "<<T - ans.second<<endl;
     
     }
 
