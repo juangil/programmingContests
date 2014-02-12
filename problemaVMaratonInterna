@@ -1,26 +1,24 @@
 Asamblea estudiantil en perelogonia:
 
-Perelogonia es una ciudad que se ha caracterizado siempre por el amor a sus instituciones.
-La Universidad Tecnócrata de Perelogonia es uno de los símbolos de la ciudad con años de reconocimiento a nivel
-nacional e internacional. Este año la UTP ha decidido remodelar las entradas a la universidad y para añadirle un toque
-"moderno" el Consejo Superior(máximo organo administrativo de la universidad) ha decidido 
+Este año la UTP(Universidad Técnocrata de perelogonia) ha decidido remodelar las entradas a la universidad y 
+para añadirle un toque "moderno" el Consejo Superior(máximo organo administrativo de la universidad) ha decidido 
 que cada entrada debe contar con unos dispositivos para controlar el acceso a la UTP, evitando
 así que extraños y ladrones puedan acceder a al universidad a hacer daños.
 
 En la UTP, universidad publica, abundan los grupos de izquierda política que ante cualquier acción
 que emprenda el CSU reaccionan de forma negativa y preparan una reunión especial en donde los estudiantes
 de toda la universidad pueden reunirse para tomar decisiones sobre que acciones a tomar con respecto a las decisiones
-del CSU, este espacio se conoce como Asamblea estudiantil . Este año no fue la excepción y  los estudiantes ahora 
-se han reunido en una de estas "Asambleas" para decidir que hacer en cuanto a la decisión del control de acceso
+del CSU; este espacio se conoce como Asamblea estudiantil . Este año no fue la excepción y  los estudiantes ahora 
+se han reunido en una de estas "Asambleas" para decidir que hacer de acuerdo a la decisión del control de acceso
 aprobada por el CSU que aún esta llena de interrogantes que ahora no discutiremos. 
 
 Una asamblea estudiantil se puede modelar de la siguiente manera:
-- Existe una secuencia de intervenciones de tamaño N y N estudiantes expositores, que son los que persuaden a los otros estudiantes para aceptar 
+- Existe una secuencia de discursos de tamaño N y N estudiantes expositores, que son los que persuaden a los otros estudiantes para aceptar 
   o no una propuesta del CSU. A cada estudiante i le corresponde la intervención i, es decir, un estudiante solo inter
   viene una vez.
-- Cada estudiante expositor i tiene un nivel de popularidad p (entre 0 y 30), es decir que la opinión 
+- Cada estudiante expositor i tiene un nivel de popularidad p (entre 0 y 100), es decir que la opinión 
   que genere en los estudiantes tiene más peso entre más alto sea este nivel.
-- Para cada estudiante expositor i existe un nivel de aceptación a(0 a 100) luego de hacer su intervención, 100
+- Para cada discurso del estudiante expositor i existe un nivel de aceptación a(0 a 100) luego de dicho discurso, 100
   significa que los estudiantes apoyan la propuesta del CSU luego de esa intervención, y 0 significa total rechazo
   a la propuesta del CSU de restringir la entrada.
 
@@ -37,12 +35,12 @@ de la facultad de ingenierías "diseñó" especialmente para el rector de la UTP
 Luego de un rato de husmear en el dispositivo del rector te das cuenta de que funciona de la siguiente manera:
 - El dispositivo le mostrará al rector un mensaje diciendo "POSIBLE PARO, NO LES PRESTES ATENCIÓN" si la
   subsecuencia decreciente más grande de discursos(donde cada discurso se mide con un nivel de aceptación a),
-  en las internvenciones[0,1,...,N], es MAYOR en longitud a la subsecuencia creciente más grande de discursos.
+  en los discursos[D0,D1,...,DN], es MAYOR en longitud a la subsecuencia creciente más grande de discursos.
 - El dispositivo le mostrará al rector un mensaje diciendo "NO ESTÁN DECIDIDOS ACTÚA CON CAUTELA" si la
-  subsecuencia decreciente más grande de discursos,  en los discursos[0,1,...,N], es IGUAL en longitud 
+  subsecuencia decreciente más grande de discursos,  en los discursos[D0,D1,...,DN], es IGUAL en longitud 
   a la subsecuencia creciente más grande de discursos.
 - El dispositivo le mostrará al rector un mensaje diciendo "NO TE PREOCUPES HAZ LO QUE QUIERAS" si la
-  subsecuencia decreciente más grande de discursos(donde cada discurso se mide con un nivel de aceptación a),
+  subsecuencia decreciente más grande de discursos,
   en los discursos[D0,D1,...,DN], es MENOR en longitud a la subsecuencia creciente más grande de discursos.
 - Una subsecuencia creciente de discursos se define como un subconjunto de discursos [d1,d2,...,dk]de la secuencia 
   original de discursos[D0,D1,...,DN], manteniendo el orden, donde a1 < a2 <...< ai < aj <...<aN y ai hace referencia al nivel
@@ -52,7 +50,32 @@ Luego de un rato de husmear en el dispositivo del rector te das cuenta de que fu
 - La longitud de una subsecuencia de discursos[d1,d2,...,dk] es igual a la suma de los niveles de popularidad
   [p1, p2,...,pk], donde pi hace referencia al nivel de popularidad del estudiante que hace el discurso di.
   
+Luego de saber esto te das cuenta de que algoritmo que usa este dispositivo para darle instrucciones al rector funciona
+en tiempo O(N!), aprovechandote de este hecho, vas a diseñar un algoritmo que te permita saber el mensaje que despleagrá
+el dispositivo del rector antes de que el rector lo pueda ver(dados la secuencia de discursos, los niveles de aceptación
+para cada discurso y los niveles de popularidad para cada estudiante que hace un discurso). De esta manera podrás saber
+si debes o no intervenir en la asamblea para evitar un posible paro,el cual el rector ignoraría y que afectaría a muchos 
+estudiantes, o, por otro lado para evitar que la gente no se olvide del problema y se haga la indiferente. 
 
+entrada
+
+La entrada se compone de varios casos de prueba, en la primera línea de cada caso de prueba se dará N(1<= N <=1000)
+que corresponde a la cantidad de discursos/estudiantes. En la segunda línea se darán N números a1,a2,...ai, aN, donde
+ai(0<=ai<=100) representa el nivel de aceptación a la propuesta del CSU luego de una intervención i. Por último en la tercera
+línea se darán N números p1,p2,...,pi,...,pN, donde pi(0<=pi<=100) hace referencia al nivel de popularidad del estudiante i que
+realiza el discurso i.La entrada termina cuando N = 0;
+
+salida
+
+hay varias opciones de salida dependiendo de las condiciones explicadas anteriormente, debes imprimir el mensaje
+que entrega el dispositivo del rector y lo que tu vas a hacer para afrontar la situación:
+
+- si la subsecuencia decreciente más grande de discursos,es MAYOR en longitud a la subsecuencia creciente 
+  más grande de discursos imprimir: POSIBLE PARO, NO LES PRESTES ATENCIÓN. DEBO INTERVENIR.
+- si la subsecuencia decreciente más grande de discursos,es IGUAL en longitud a la subsecuencia creciente 
+  más grande de discursos imprimir: NO ESTÁN DECIDIDOS ACTÚA CON CAUTELA. NO DEBO INTERVENIR.
+- si la subsecuencia decreciente más grande de discursos,es MENOR en longitud a la subsecuencia creciente 
+  más grande de discursos imprimir: NO TE PREOCUPES HAZ LO QUE QUIERAS. DEBO INTERVENIR.
 
 
 
