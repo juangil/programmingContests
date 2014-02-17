@@ -12,27 +12,27 @@ int dp[MAXNODES][2];
 
 int minExitsFrom(int node, bool selected){
     if(dp[node][selected] != -1) return dp[node][selected];
-    if(G[node].size() == 1 && selected) return 1;
-    if(G[node].size() == 1 && !selected) return 0;
+    if(G[node].size() == 1 && selected) return dp[node][selected] = 1;
+    if(G[node].size() == 1 && !selected) return dp[node][selected] = 0;
     
     int ans = 0;
     if(selected){
-        //ans += 1;
-        int ans1 = 0, ans2 = 0;
         for(int i = 0; i < G[node].size(); ++i){
             if(G[node][i] != parent[node]){
                 parent[G[node][i]] = node;
-                minExitsFrom(G[node][i], false);
-                ans1 += minExitsFrom(G[node][i], true);
+                int op1 = minExitsFrom(G[node][i], true);
+                int op2 = minExitsFrom(G[node][i], false);
+                cout<<op1<<" "<<op2<<endl;
+                ans = min(op1, op2) + 1;
             }
         }
-        ans += ans1;
+        
     }
     else{
         for(int i = 0; i < G[node].size(); ++i){
             if(G[node][i] != parent[node]){
                 parent[G[node][i]] = node;
-                minExitsFrom(G[node][i], true);
+                return dp[node][selected] = minExitsFrom(G[node][i], true);
             }
         }
     }
@@ -64,8 +64,11 @@ int main(){
             for(int j = 0; j < 2; ++j)
                 dp[i][j] = -1;
     
-        int ans = max(minExitsFrom(0,0), minExitsFrom(0,1));
-        cout<<n - ans<<endl;
+        int ans = min(minExitsFrom(0,0), minExitsFrom(0,1));
+        //cout<<endl;
+        cout<<ans<<endl;
+        //cout<<endl;
+        
         
     }
     return 0;
