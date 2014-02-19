@@ -12,29 +12,28 @@ int dp[MAXNODES][2];
 
 int minExitsFrom(int node, bool selected){
     if(dp[node][selected] != -1) return dp[node][selected];
-    if(G[node].size() == 1 && selected) return dp[node][selected] = 1;
-    if(G[node].size() == 1 && !selected) return dp[node][selected] = 0;
+    //if(G[node].size() == 1 && selected) return 1;
+    //if(G[node].size() == 1 && !selected) return 0;
     
     int ans = 0;
     if(selected){
+        ans = 0;
         for(int i = 0; i < G[node].size(); ++i){
             if(G[node][i] != parent[node]){
                 parent[G[node][i]] = node;
-                int op1 = minExitsFrom(G[node][i], true);
-                int op2 = minExitsFrom(G[node][i], false);
-                cout<<op1<<" "<<op2<<endl;
-                ans = min(op1, op2) + 1;
+                ans += min(1 + minExitsFrom(G[node][i], true), minExitsFrom(G[node][i], false));
             }
         }
-        
     }
     else{
+        ans = 0;
         for(int i = 0; i < G[node].size(); ++i){
             if(G[node][i] != parent[node]){
                 parent[G[node][i]] = node;
-                return dp[node][selected] = minExitsFrom(G[node][i], true);
+                ans += 1 + minExitsFrom(G[node][i], true);
             }
         }
+        //ans = op1;
     }
     return dp[node][selected] = ans;
 }
@@ -43,17 +42,20 @@ int minExitsFrom(int node, bool selected){
 int main(){
     int n;
     while(cin >> n && n){
-        for(int i = 0; i < n; ++i){
+        for(int i = 0; i < MAXNODES; ++i){
             parent[i] = -1;
             weight[i] = 1;
             G[i].clear();
         }
         for(int i = 0; i < n; ++i){
             int m; cin >> m;
+            //cout<<i+1<<" ";
             for(int j = 0; j < m; ++j){
                 int v; cin >> v;
                 G[i].push_back(v-1);
+                //cout<<(G[i][j]+1)<<" ";
             }
+            //cout<<endl;
         
         }
         if(n == 1){
@@ -64,12 +66,9 @@ int main(){
             for(int j = 0; j < 2; ++j)
                 dp[i][j] = -1;
     
-        int ans = min(minExitsFrom(0,0), minExitsFrom(0,1));
-        //cout<<endl;
+        
+        int ans = min (minExitsFrom(0,0), minExitsFrom(0,1)+1);
         cout<<ans<<endl;
-        //cout<<endl;
-        
-        
     }
     return 0;
 }

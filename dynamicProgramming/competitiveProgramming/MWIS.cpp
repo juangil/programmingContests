@@ -34,9 +34,9 @@ int maxWeightFrom(int node, bool selected){
                     parent[G[node][i]] = node;
                     tmp1 = maxWeightFrom(G[node][i], false);
                     tmp2 = maxWeightFrom(G[node][i], true);
-                    ans += max(tmp1, tmp2);
                 }
         }
+        ans += max(tmp1, tmp2);
                 
     }
     return dp[node][selected] = ans;
