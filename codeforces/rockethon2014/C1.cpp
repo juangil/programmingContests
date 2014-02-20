@@ -17,7 +17,8 @@ void matching(int bit_mask){
     
     if(dp[bit_mask] != -1) return;
     for(int i = 0; i < N; ++i) gane[i] = 0;
-    if(bit_mask != 0){
+    if(bit_mask >= 0){
+          vector<int> nuevo_tablero = tablero;
           int mypoints = 0;
           int total = 0;
           for(int i = 0; i < N; ++i){
@@ -26,35 +27,30 @@ void matching(int bit_mask){
                   gane[i] = 1;
                   total += effort[i];
                }
-               else gane[i] = 0;
-          }
-          int mypos;
-          for(int k = tablero.size() - 1; k >= 0; --k){
-               if(tablero[k] >= mypoints){
-                    if(tablero[k] == mypoints){
-                         int j = k;
-                         while(tablero[j] == mypoints && j >= 0){
-                              if(gane[j]){
-                                   mypos = j;
-                                   j--;
-                              }
-                              else break;
-                         }
-                    }
-                    else mypos = k - 1;
+               else{
+                  gane[i] = 0;
+                  nuevo_tablero[i] += 1;
                }
           }
-          if (mypos+1 <= K) dp[bit_mask] = total;
+          //for(int i = 0; i < N; ++i) cout<<nuevo_tablero[i]<<" gane "<<gane[i]<<" ,";
+          //cout<<endl;
+          int mypos = N + 1;
+          for(int i = 0; i < N; ++i){
+                if(mypoints > nuevo_tablero[i]) mypos--;
+                else if(mypoints == nuevo_tablero[i] && gane[i]) mypos--;
+          
+          }
+          //cout<<mypos<<" "<<total<<" "<<mypoints<<endl;
+          if(mypos <= K) dp[bit_mask] = total;
           else dp[bit_mask] = -2;
-          return;
     }
     
-    double ans = (double)(1<<30);
-    for(int i = 0; i < N; ++i)
+    for(int i = 0; i < N; ++i){
         if(!(bit_mask & (1 << i)))
                matching(bit_mask | (1 << i));
+    }
      
-     return;
+    return;
 }
 
 
@@ -69,11 +65,13 @@ int main(){
      for(int i = 0; i < (1<<n); ++i)
           dp[i] = -1;
      
+     //dp[0] = -2;
      N = n; K = k;
      matching(0);
      int menor = 1<<30;
      for(int i = 0; i < (1<<n); ++i){
-          if(dp[i] != -2){
+          //cout<<dp[i]<<endl;
+          if(dp[i] != -2 && dp[i] != -1){
                if(dp[i] < menor)
                     menor = dp[i];
           }
