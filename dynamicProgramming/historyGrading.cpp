@@ -13,7 +13,7 @@ int lis(int i){
     for(int j = 0; j < i; ++j){
         if((new_pos[i] > new_pos[j]) && (my_pos[i] > my_pos[j]))
             ans = max(ans, 1 + lis(j));
-        else if((new_pos[i] < new_pos[j]) && (my_pos[i] < my_pos[j]))
+        if((new_pos[i] < new_pos[j]) && (my_pos[i] < my_pos[j]))
             ans = max(ans, 1 + lis(j));
     }
     //cout<<ans<<endl;
@@ -22,13 +22,19 @@ int lis(int i){
 
 int main(){
     int n; cin >> n;
-    for(int i = 0; i < n; ++i)
-            cin >> my_pos[i];
+    for(int i = 0; i < n; ++i){
+        int a; cin >> a;
+        my_pos[a - 1] = i + 1;
+    }
     N = n;
     n--;
-    while(cin >> new_pos[0]){
-        for(int i = 1; i < N; ++i)
-            cin >> new_pos[i];
+    int b;
+    while(cin >> b){
+        new_pos[b - 1] = 1;
+        for(int i = 1; i < N; ++i){
+            int a; cin >> a;
+            new_pos[a - 1] = i +1;
+        }
         
         for(int i = 0; i < N; ++i) dp[i] = -1;
         
