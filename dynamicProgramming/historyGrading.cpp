@@ -11,20 +11,16 @@ int lis(int i){
     if(i == 0) return 1;
     int ans = 1;
     for(int j = 0; j < i; ++j){
-        if((new_pos[i] > new_pos[j]) && (my_pos[i] > my_pos[j]))
-            ans = max(ans, 1 + lis(j));
-        if((new_pos[i] < new_pos[j]) && (my_pos[i] < my_pos[j]))
+        if((my_pos[new_pos[i] - 1] > my_pos[new_pos[j] - 1]))
             ans = max(ans, 1 + lis(j));
     }
-    //cout<<ans<<endl;
     return ans;
 }
 
 int main(){
     int n; cin >> n;
     for(int i = 0; i < n; ++i){
-        int a; cin >> a;
-        my_pos[a - 1] = i + 1;
+        cin >> my_pos[i];
     }
     N = n;
     n--;
@@ -45,5 +41,6 @@ int main(){
         }
         cout<<ans<<endl;
     }
+    return 0;
 
 }
