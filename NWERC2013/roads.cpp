@@ -80,10 +80,20 @@ int main(){
         while(new_edges.size() < n - 1){//vamos a crear aristas hasta que tengamos n -1
             edge actual = my_edges.top();
             my_edges.pop();
-            G[actual.u].push_back(actual.v);
-            G[actual.v].push_back(actual.u);
-            new_edges.push_back(actual);
-            link(actual.u, actual.v);
+            if(actual.w == menor){//si son los menores los creamos explicitamente
+                G[actual.u].push_back(actual.v);
+                G[actual.v].push_back(actual.u);
+                new_edges.push_back(actual);
+                link(actual.u, actual.v);
+            }
+            else{
+                if(find_set(actual.u) != find_set(actual.v)){//si son diferentes de los menores miramos si podemos usar otras aristas ya creadas
+                    new_edges.push_back(actual);
+                    G[actual.u].push_back(actual.v);
+                    G[actual.v].push_back(actual.u);
+                    link(actual.u, actual.v);
+                } 
+            }  
         }
         
         minsum = (1<<30);
