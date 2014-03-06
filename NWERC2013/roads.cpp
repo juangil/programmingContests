@@ -2,8 +2,10 @@
 
 using namespace std;
 const int MAXN = 2002;
+const int INF = 2000000010;
+
 int N; int origen;
-int my_cost[MAXN][MAXN];
+    int my_cost[MAXN][MAXN];
 int p[MAXN];
 int visited [MAXN];
 int minsum = (1<<30);
@@ -39,8 +41,6 @@ void dfs(int ini, int sum){
         minsum = sum;
         min_edge = edge(origen, ini, my_cost[origen][ini]);
     }
-    
-     
     visited[ini] = 1;
     for(int i = 0; i < G[ini].size(); ++i)
         if(!visited[G[ini][i]]) dfs(G[ini][i], sum + my_cost[ini][G[ini][i]]);
@@ -57,7 +57,7 @@ int main(){
         N = n;
         priority_queue<edge> my_edges;
         int menor  = (1 << 30);
-        min_edge = edge(-1,-1,(1<<30));
+        min_edge = edge(-1,-1,INF);
         new_edges.clear();
         for(int i = 0; i < n; ++i){
             G[i].clear();//limpiamos todo lo que vamos a utilizar
@@ -80,30 +80,23 @@ int main(){
         while(new_edges.size() < n - 1){//vamos a crear aristas hasta que tengamos n -1
             edge actual = my_edges.top();
             my_edges.pop();
-            if(actual.w == menor){//si son los menores los creamos explicitamente
+            if(find_set(actual.u) != find_set(actual.v)){//si son diferentes de los menores miramos si podemos usar otras aristas ya creadas
+                new_edges.push_back(actual);
                 G[actual.u].push_back(actual.v);
                 G[actual.v].push_back(actual.u);
-                new_edges.push_back(actual);
                 link(actual.u, actual.v);
-            }
-            else{
-                if(find_set(actual.u) != find_set(actual.v)){//si son diferentes de los menores miramos si podemos usar otras aristas ya creadas
-                    new_edges.push_back(actual);
-                    G[actual.u].push_back(actual.v);
-                    G[actual.v].push_back(actual.u);
-                    link(actual.u, actual.v);
-                } 
-            }  
+            } 
+            
         }
         
-        minsum = (1<<30);
+        minsum = INF;
         for(int i = 0; i < n; ++i){
             origen = i;//vamos a correr un dfs desde cada nodo origen (global)para mirar si hay rutas incosistentes con la matriz de costo inicial
             for(int j = 0; j < n; ++j) visited[j] = 0;
             dfs(i,0);
         }
-        //cout<<my_cost[min_edge.u][min_edge.v]<<endl;
-        if(min_edge.u != -1 && min_edge.v != -1 && min_edge.w != (1<<30)) new_edges.push_back(min_edge);
+
+        if(min_edge.u != -1 && min_edge.v != -1 && min_edge.w != INF) new_edges.push_back(min_edge);
         if(new_edges.size() == n - 1) new_edges.push_back(new_edges[0]);
         for(int i = 0; i < new_edges.size(); ++i)
             cout<<new_edges[i].u + 1<<" "<<new_edges[i].v + 1<<" "<<new_edges[i].w<<endl;
