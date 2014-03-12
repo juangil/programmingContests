@@ -9,6 +9,7 @@ int N;
 
 int solve(int amount){
      if(amount < 0) return infin;
+     if(amount == 0) return 1;
      if(dp[amount] != -1)return dp[amount];
      int minCoin = infin;
      cout<<amount<<endl;
