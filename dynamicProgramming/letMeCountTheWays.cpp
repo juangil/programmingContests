@@ -9,7 +9,7 @@ const int N = 5;
 const int MAXN = 30003;
 const int INF = 1<<30;
 int my_coins[] = {1, 5, 10, 25, 50};
-ulli dp[MAXN][5];
+ulli dp[MAXN][N];
 
 
 
@@ -27,19 +27,18 @@ ulli solve(int amount, int coin){
 }
 
 int main(){
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
 	int v; 
-	while(cin >> v){
-		for(int i = 0; i <= v; ++i)
+	for(int i = 0; i <= MAXN; ++i)
 			for(int j = 0; j < N; ++j)
 				dp[i][j] = -1;
 
+	while(cin >> v){
 		if(v == 0){
-			//cout<<"There is only 1 way to produce "<<v<<" cents change."<<endl;
-			cout<<0<<endl;
+			cout<<"There is only 1 way to produce "<<v<<" cents change."<<endl;
 			continue;
 		}
-		//for(int i = 1; i <= v; ++i)
-		//	solve(i, 0);
 		ulli ans = solve(v,0);
 		if(ans == 1)cout<<"There is only 1 way to produce "<<v<<" cents change."<<endl;
 		else cout<<"There are "<<ans<<" ways to produce "<<v<<" cents change."<<endl;
