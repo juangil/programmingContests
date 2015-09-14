@@ -33,7 +33,7 @@ void MyRmq::rmq_preprocess(){
     for(int j = 1; 1 << j <= mnums.size(); ++j){
         for(int i = 0; i + (1 << j) - 1 < mnums.size(); ++i){
             if(i == 12) cout << j << endl;
-            if(mnums[rmq_in[i][j - 1]] < mnums[rmq_in[i + (1 << (j - 1))][j - 1]])
+            if(mnums[rmq_in[i][j - 1]] > mnums[rmq_in[i + (1 << (j - 1))][j - 1]])
                 rmq_in[i][j] = rmq_in[i][j - 1];
             else
                 rmq_in[i][j] = rmq_in[i + (1 << (j - 1))][j - 1];
@@ -54,7 +54,7 @@ int MyRmq::rmquery(int a, int b){
     cout << a << " to " << a + (1 << k) << endl;
     cout << (b - (1 << k) +  1) << " to " << ((b - (1 << k) +  1) + (1 << k)) << endl;
     cout<<endl;*/
-    if(mnums[rmq_in[a][k]] <= mnums[rmq_in[b - (1 << k) + 1][k]])
+    if(mnums[rmq_in[a][k]] >= mnums[rmq_in[b - (1 << k) + 1][k]])
         return mnums[rmq_in[a][k]];
     else
         return mnums[rmq_in[b - (1 << k) + 1][k]];
@@ -71,21 +71,33 @@ void MyRmq::debug(){
 }
 
 int main(){
-    int n, m;
-    while(cin >> n >> m){
-        vector<int> mio(n);
-        for(int i = 0; i < n; ++i)
-            cin >> mio[i];
-
-        MyRmq rmq(mio);
-        rmq.rmq_preprocess();
-        //cout << "pass" << endl;
-        //rmq.debug();
-        for(int i = 0; i < m; ++i){
-            int a,b;
-            cin >> a >> b;
-            cout << rmq.rmquery(a,b) << endl;
+    int T; cin >> T;
+    for(int t = 1; t <= T; ++t){
+        int n,q; cin >> n >> q;
+        vector<int> mnums(n*n);
+        for(int i = 0; i < n; ++i){
+            for(int j = 0; j < n; ++j){
+                int a; cin >> a;
+                mnums[(n*i) + j] = a;
+            }
         }
+        for(int i = 0; i < n*n; ++i){
+            cout << mnums[i] << " ";
+        }
+        cout << endl;
+        MyRmq rmq(mnums);
+        rmq.rmq_preprocess();
+        cout << "Case " << t << ": " << endl;
+        for(int i = 0; i < q; ++i){
+            int a, b, s;
+            cin >> a >> b >> s;
+            a--; b--;
+            int l = (n*a) + b;
+            int r = (n * (a + s - 1)) + (b + s - 1);
+            cout << l << " " << r << endl;
+            cout << rmq.rmquery(l,r) << endl;
+        }
+
     }
     return 0;
 }
